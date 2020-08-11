@@ -1,17 +1,26 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <input type="button" value="-" v-on:click="minus" />
+    {{ count }}
+    <input type="button" value="+" v-on:click="plus" />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  name: 'app',
+  computed: {
+    count() {
+      return this.$store.state.count
+    }
+  },
+  methods: {
+    minus() {
+      this.$store.commit('minus')
+    },
+    plus() {
+      this.$store.commit('plus')
+    }
   }
 }
 </script>
