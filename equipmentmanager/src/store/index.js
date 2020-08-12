@@ -5,12 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    items: [
-      {
-        name: '',
-        count: 0
-      }
-    ]
+    items: []
   },
   getters: {
     itemsCount(state) {
@@ -20,6 +15,10 @@ export default new Vuex.Store({
   mutations: {
     addItem(state, payload) {
       state.items.push(payload.item)
+    },
+    deleteItem(state, item) {
+      let indexed = state.items.indexOf(item);
+      state.items.splice(indexed, 1)
     },
     minus(state) {
       state.items.count--
