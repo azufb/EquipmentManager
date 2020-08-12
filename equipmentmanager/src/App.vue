@@ -1,12 +1,15 @@
 <template>
   <div id='app'>
+    <h1>備品管理</h1>
     <form v-on:submit.prevent="onclick">
       <label for='name'>品目名</label>
       <input type='text' id='name' v-model='name' required/>
       <input type='submit' value='登録' />
     </form>
     <ul v-for="(item, index) in items" :key="index">
-    <li>{{ item.name }}</li>
+    <li>
+      {{ item.name }}
+    </li>
     </ul>
   </div>
 </template>
@@ -17,6 +20,7 @@ export default {
   computed: {
     items() {
       return this.$store.state.items
+
     }
   },
   data() {
@@ -31,6 +35,12 @@ export default {
           name: this.name
         }
       })
+    },
+    minus() {
+      this.$store.commit('minus')
+    },
+    plus() {
+      this.$store.commit('plus')
     }
   }
   
