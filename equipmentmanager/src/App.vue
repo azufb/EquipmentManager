@@ -3,12 +3,13 @@
     <h1>備品管理</h1>
     <form v-on:submit.prevent="onclick">
       <label for='name'>品目名</label>
-      <input type='text' id='name' v-model='name' required/>
+      <input type='text' id='name' v-model='name' required />
       <input type='submit' value='登録' />
     </form>
-    <ul v-for="(item, index) in items" :key="index">
+    <ul v-for='(item, index) in items' :key='index'>
     <li>
       {{ item.name }}
+      <input type='button' value='delete' v-on:click='deleteItem' />
     </li>
     </ul>
   </div>
@@ -20,7 +21,6 @@ export default {
   computed: {
     items() {
       return this.$store.state.items
-
     }
   },
   data() {
@@ -36,6 +36,9 @@ export default {
         }
       })
     },
+    deleteItem() {
+      this.$store.commit('deleteItem')
+    },
     minus() {
       this.$store.commit('minus')
     },
@@ -43,7 +46,6 @@ export default {
       this.$store.commit('plus')
     }
   }
-  
 } 
 </script>
 
