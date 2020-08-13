@@ -11,7 +11,7 @@
       {{ item.name }}
       <input type='button' value='delete' v-on:click='deleteItem' />
       <input type="button" value="plus" v-on:click="plus" />
-        {{ item.count }}
+        <span>{{ item.count }}</span>
       <input type="button" value="minus" v-on:click="minus" />
     </li>
     </ul>
