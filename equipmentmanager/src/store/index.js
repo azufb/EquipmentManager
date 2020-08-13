@@ -5,11 +5,11 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    items: []
+    items: [],
   },
   getters: {
-    itemsCount(state) {
-      return state.items.length
+    counter(state) {
+      return state.items.count
     }
   },
   mutations: {
@@ -22,9 +22,11 @@ export default new Vuex.Store({
     },
     minus(state) {
       state.items.count--
+      console.log(state.items)
     },
     plus(state) {
       state.items.count++
+      console.log(state.items)
     }
   },
   actions: {

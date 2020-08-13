@@ -10,6 +10,9 @@
     <li>
       {{ item.name }}
       <input type='button' value='delete' v-on:click='deleteItem' />
+      <input type="button" value="plus" v-on:click="plus" />
+        {{ item.count }}
+      <input type="button" value="minus" v-on:click="minus" />
     </li>
     </ul>
   </div>
@@ -25,14 +28,16 @@ export default {
   },
   data() {
     return {
-      name: ''
+      name: '',
+      count: 0
     }
   },
   methods: {
     onclick() {
       this.$store.commit('addItem', {
         item: {
-          name: this.name
+          name: this.name,
+          count: 0
         }
       })
     },
