@@ -9,10 +9,10 @@
     <ul v-for='(item, index) in items' :key='index'>
     <li>
       {{ item.name }}
-      <input type='button' value='delete' v-on:click='deleteItem' />
-      <input type="button" value="plus" v-on:click="plus" />
-        <span>{{ item.count }}</span>
-      <input type="button" value="minus" v-on:click="minus" />
+      <input type='button' value='delete' v-on:click="deleteItem" />
+      <input type="button" value="plus" @click="plus()"/>
+        {{ item.count }}
+      <input type="button" value="minus" @click="minus()"/>
     </li>
     </ul>
   </div>
@@ -23,13 +23,15 @@ export default {
   name: 'app',
   computed: {
     items() {
-      return this.$store.state.items
+      return this.$store.getters.items
+    },
+    count() {
+      return this.$store.getters.items.count
     }
   },
   data() {
     return {
-      name: '',
-      count: 0
+      name: ''
     }
   },
   methods: {
@@ -44,11 +46,15 @@ export default {
     deleteItem() {
       this.$store.commit('deleteItem')
     },
-    minus() {
-      this.$store.commit('minus')
+    minus(x = 1) {
+      this.$store.dispatch('minus', {
+        dec: x
+      })
     },
-    plus() {
-      this.$store.commit('plus')
+    plus(y = 1) {
+      this.$store.dispatch('plus', { 
+        inc: y
+      })
     }
   }
 } 
