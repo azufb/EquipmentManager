@@ -8,11 +8,13 @@
     </form>
     <ul v-for='(item, index) in items' :key='index'>
       <li>
+        <div class="divi">
         {{ item.name }}
         <input type='button' value='delete' @click='deleteItem(index)' />
         <input type='button' value='plus' @click='item.count += 1' />
           {{ item.count }}
         <input type='button' value='minus' @click='item.count -= 1' />
+        </div>
       </li>
     </ul>
   </div>
@@ -59,16 +61,64 @@ export default {
 </script>
 
 <style>
+* {
+  background-color: cadetblue;
+}
+
+body {
+  margin: 0px;
+  background-color: white;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
+h1 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-top: 15px;
+  background-color: white;
+}
+
+form {
+  margin-top: 0px;
+  background-color: white;
+}
+
+label {
+  background-color: white;
+  font-weight: bold;
+}
+
+input {
+  background-color: white;
+  font-weight: bold;
+}
 ul li {
   list-style: none;
+  width: 500px;
 }
+
+.divi {
+  border: 1px solid black;
+  background-color: white;
+}
+
+footer {
+  margin-top: auto;
+}
+
+p {
+  margin: 0px;
+  font-size: 12px;
+  background-color: white;
+}
+
 </style>
