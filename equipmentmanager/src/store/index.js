@@ -5,10 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    items: [{
-      name: 'あ',
-      count: 0
-    }]
+    items: []
   },
 
   getters: {
