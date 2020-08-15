@@ -29,23 +29,20 @@ export default new Vuex.Store({
       console.log('click')
     },
     minus(state, payload) {
-      /*state.items.count -= 1
-      state.items.splice()
-      console.log('click')*/
-      state.items.count -= payload.dec
-      console.log(state.items)
-      console.log(state.items.name)
-      console.log(state.items.count)
+      state.items.forEach(item => 
+        item.count -= payload.dec
+      )
+      console.log(state.items[0])
+      console.log(state.items[0].name)
+      console.log(state.items[0].count)
     },
     plus(state, payload) {
-      /*state.items.count += 1
-      state.items.splice()
-      console.log('click')
-      console.log(state.items)*/
-      state.items.count += payload.inc
-      console.log(state.items)
-      console.log(state.items.name)
-      console.log(state.items.count)
+      state.items.forEach(item => 
+        item.count += payload.inc
+      )
+      console.log(state.items[0])
+      console.log(state.items[0].name)
+      console.log(state.items[0].count)
     }
   },
   actions: {
