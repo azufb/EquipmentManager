@@ -7,13 +7,13 @@
       <input type='submit' value='登録' />
     </form>
     <ul v-for='(item, index) in items' :key='index'>
-    <li>
-      {{ item.name }}
-      <input type='button' value='delete' v-on:click="deleteItem" />
-      <input type="button" value="plus" @click="plus()"/>
-        {{ item.count }}
-      <input type="button" value="minus" @click="minus()"/>
-    </li>
+      <li>
+        {{ item.name }}
+        <input type='button' value='delete' @click='deleteItem(index)' />
+        <input type='button' value='plus' @click='item.count += 1' />
+          {{ item.count }}
+        <input type='button' value='minus' @click='item.count -= 1' />
+      </li>
     </ul>
   </div>
 </template>
@@ -24,14 +24,12 @@ export default {
   computed: {
     items() {
       return this.$store.getters.items
-    },
-    count() {
-      return this.$store.getters.items.count
     }
   },
   data() {
     return {
-      name: ''
+      name: '',
+      count: 0
     }
   },
   methods: {
@@ -46,7 +44,7 @@ export default {
     deleteItem() {
       this.$store.commit('deleteItem')
     },
-    minus(x = 1) {
+    /*minus(x = 1) {
       this.$store.dispatch('minus', {
         dec: x
       })
@@ -55,7 +53,7 @@ export default {
       this.$store.dispatch('plus', { 
         inc: y
       })
-    }
+    }*/
   }
 } 
 </script>
