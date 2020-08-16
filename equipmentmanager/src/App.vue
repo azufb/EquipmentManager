@@ -8,13 +8,11 @@
     </form>
     <ul v-for='(item, index) in items' :key='index'>
       <li>
-        <div class="divi">
         {{ item.name }}
         <input type='button' value='delete' @click='deleteItem(item)' />
         <input type='button' value='plus' @click='item.count += 1' />
           {{ item.count }}
         <input type='button' value='minus' @click='item.count -= 1' />
-        </div>
       </li>
     </ul>
   </div>
@@ -26,12 +24,14 @@ export default {
   computed: {
     items() {
       return this.$store.getters.items;
+    },
+    count() {
+      return this.$store.getters.items.count;
     }
   },
   data() {
     return {
-      name: '',
-      count: 0
+      name: ''
     }
   },
   methods: {
@@ -62,7 +62,7 @@ export default {
 
 <style>
 * {
-  background-color: cadetblue;
+  background-color: #d6d6d6;
 }
 
 body {
@@ -101,13 +101,9 @@ input {
   background-color: white;
   font-weight: bold;
 }
+
 ul li {
   list-style: none;
-}
-
-.divi {
-  border: 1px solid black;
-  background-color: white;
 }
 
 footer {

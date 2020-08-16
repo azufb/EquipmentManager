@@ -12,6 +12,9 @@ export default new Vuex.Store({
   getters: {
     items(state) {
       return state.items;
+    },
+    count(state) {
+      return state.items.count;
     }
   },
   mutations: {
@@ -19,9 +22,8 @@ export default new Vuex.Store({
       state.items.push(payload.item);
     },
     deleteItem(state, item) {
-      let itms = state.items;
-      let index = itms.indexOf(item);
-      itms.splice(index, 1);
+      let index = state.items.indexOf(item);
+      state.items.splice(index, 1);
       console.log(index);
       /*let index = state.items.indexOf(name);
       state.items.splice(index, 1);
@@ -57,6 +59,6 @@ export default new Vuex.Store({
       store.commit('plus', payload)
     }*/
   },
-  plugins: [createPersistedState()]
+  plugins: [createPersistedState({storage: window.sessionStorage})]
 
 })
