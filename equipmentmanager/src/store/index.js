@@ -11,17 +11,26 @@ export default new Vuex.Store({
 
   getters: {
     items(state) {
-      return state.items
+      return state.items;
     }
   },
   mutations: {
     addItem(state, payload) {
-      state.items.push(payload.item)
+      state.items.push(payload.item);
     },
-    deleteItem(state, index) {
-      let indexed = state.items.indexOf(index)
-      state.items.splice(indexed, 1)
-      console.log(indexed)
+    deleteItem(state, item) {
+      let itms = state.items;
+      let index = itms.indexOf(item);
+      itms.splice(index, 1);
+      console.log(index);
+      /*let index = state.items.indexOf(name);
+      state.items.splice(index, 1);
+      console.log(index);
+      console.log(state.items)*/
+
+      /* 全部消えたやつ
+      let filtered = state.items.filter(item =>item.index === index);
+      return state.items.splice(filtered);*/
     },
     /*minus(state, payload) {
       state.items.forEach((item) => {
