@@ -19,7 +19,7 @@ export default new Vuex.Store({
       state.items.push(payload.item);
     },
     deleteItem(state, item) {
-      let itms = state.items.slice();
+      let itms = state.items;
       let index = itms.indexOf(item);
       itms.splice(index, 1);
       console.log(index);
