@@ -6,15 +6,17 @@
       <input type='text' id='name' v-model='name' required />
       <input type='submit' value='登録' />
     </form>
-    <div class="list">
     <ul v-for='(item, index) in items' :key='index'>
-      <li>{{ item.name }}</li>
-      <input class="delete" type='button' value='delete' @click='deleteItem(item)' />
-      <input class="plus" type='button' value='+' @click='item.count += 1' />
-        <span class="count">{{ item.count }}</span>
-      <input class="minus" type='button' value='-' @click='item.count -= 1' />
+      <li>
+        <div class="divi">
+        {{ item.name }}
+        <input type='button' value='delete' @click='deleteItem(item)' />
+        <input type='button' value='plus' @click='item.count += 1' />
+          {{ item.count }}
+        <input type='button' value='minus' @click='item.count -= 1' />
+        </div>
+      </li>
     </ul>
-    </div>
   </div>
 </template>
 
@@ -60,7 +62,7 @@ export default {
 
 <style>
 * {
-  background-color: #d6d6d6;
+  background-color: cadetblue;
 }
 
 body {
@@ -99,43 +101,13 @@ input {
   background-color: white;
   font-weight: bold;
 }
-
-.list {
-  width: 100%;
-}
-
-.list ul {
-  width: 50%;
-  margin: 0 auto;
-  display: flex;
-}
-
 ul li {
   list-style: none;
-  font-size: 30px;
-  width: 300px;
+}
+
+.divi {
   border: 1px solid black;
   background-color: white;
-}
-
-.delete {
-  background-color: black;
-  color: white;
-}
-
-.plus {
-  margin-left: 10px;
-  background-color: black;
-  color: white;
-}
-
-.minus {
-  background-color: black;
-  color: white;
-}
-
-.count {
-  font-size: 30px;
 }
 
 footer {
