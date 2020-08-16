@@ -10,7 +10,7 @@
       <li>
         <div class="divi">
         {{ item.name }}
-        <input type='button' value='delete' @click='deleteItem(index)' />
+        <input type='button' value='delete' @click='deleteItem(item)' />
         <input type='button' value='plus' @click='item.count += 1' />
           {{ item.count }}
         <input type='button' value='minus' @click='item.count -= 1' />
@@ -25,7 +25,7 @@ export default {
   name: 'app',
   computed: {
     items() {
-      return this.$store.getters.items
+      return this.$store.getters.items;
     }
   },
   data() {
@@ -41,10 +41,10 @@ export default {
           name: this.name,
           count: 0
         }
-      })
+      });
     },
     deleteItem() {
-      this.$store.commit('deleteItem')
+      this.$store.commit('deleteItem');
     },
     /*minus(x = 1) {
       this.$store.dispatch('minus', {
@@ -103,7 +103,6 @@ input {
 }
 ul li {
   list-style: none;
-  width: 500px;
 }
 
 .divi {
