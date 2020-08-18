@@ -9,10 +9,10 @@
     <ul v-for='(item, index) in items' :key='index'>
       <li>
         {{ item.name }}
-        <input type='button' value='delete' @click='deleteItem(item)' />
-        <input type='button' value='plus' @click='item.count += 1' />
+        <input type='button' value='delete' @click='deleteItem(item.name)' />
+        <input type='button' value='plus' @click='plus(item.name)' />
           {{ item.count }}
-        <input type='button' value='minus' @click='item.count -= 1' />
+        <input type='button' value='minus' @click='minus(item.name)' />
       </li>
     </ul>
   </div>
@@ -43,19 +43,15 @@ export default {
         }
       });
     },
-    deleteItem() {
-      this.$store.commit('deleteItem');
+    deleteItem(name) {
+      this.$store.commit('deleteItem', name);
     },
-    /*minus(x = 1) {
-      this.$store.dispatch('minus', {
-        dec: x
-      })
+    minus(name) {
+      this.$store.commit('minus', name);
     },
-    plus(y = 1) {
-      this.$store.dispatch('plus', { 
-        inc: y
-      })
-    }*/
+    plus(name) {
+      this.$store.commit('plus', name);
+    }
   }
 } 
 </script>
