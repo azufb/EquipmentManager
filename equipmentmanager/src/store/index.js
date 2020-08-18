@@ -21,16 +21,14 @@ export default new Vuex.Store({
     addItem(state, payload) {
       state.items.push(payload.item);
     },
-    deleteItem(state, item) {
-      let index = state.items.indexOf(item);
+    deleteItem(state, name) {
+      
+      let index = state.items.indexOf(name);
       state.items.splice(index, 1);
       console.log(index);
-      /*let index = state.items.indexOf(name);
-      state.items.splice(index, 1);
-      console.log(index);
-      console.log(state.items)*/
+      console.log(state.items)
 
-      /* 全部消えたやつ
+      /*全部消えたやつ
       let filtered = state.items.filter(item =>item.index === index);
       return state.items.splice(filtered);*/
     },
