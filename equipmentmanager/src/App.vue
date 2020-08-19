@@ -7,17 +7,15 @@
       <input type='text' id='name' v-model='name' required />
       <input class='addBtn' type='submit' value='登録' />
     </form>
-    <table v-for='(item, index) in items' :key='index'>
-      <tr>
-        <td>{{ item.name }}</td>
-        <td>
-          <input type='button' value='削除' @click='deleteItem(item.name)' />
-          <input type='button' value='＋' @click='plus(item.name)' />
-          {{ item.count }}
-          <input type='button' value='ー' @click='minus(item.name)' />
-        </td>
-      </tr>
-    </table>
+    <ul v-for='(item, index) in items' :key='index'>
+      <li>
+        {{ item.name }}
+        <input type='button' value='削除' @click='deleteItem(item.name)' />
+        <input type='button' value='＋' @click='plus(item.name)' />
+        {{ item.count }}
+        <input type='button' value='ー' @click='minus(item.name)' />
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -89,6 +87,10 @@ label {
 
 input {
   font-weight: bold;
+}
+
+ul li {
+  list-style: none;
 }
 
 footer {
