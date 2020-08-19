@@ -1,18 +1,23 @@
 <template>
   <div id='app'>
     <h1>Equipment Manager</h1>
+    <p>家庭内の備品を名称・購入先(ブランド名)・個数と共に管理できます。</p>
     <form v-on:submit.prevent="onclick">
       <label for='name'>品目名</label>
       <input type='text' id='name' v-model='name' required />
+      <label for='brand'>ブランド名</label>
+      <input type='text' id='brand' v-model='brand' />
       <input type='submit' value='登録' />
     </form>
     <ul v-for='(item, index) in items' :key='index'>
       <li>
         {{ item.name }}
-        <input type='button' value='delete' @click='deleteItem(item.name)' />
-        <input type='button' value='plus' @click='plus(item.name)' />
+        <span class='brand'></span>
+        {{ item.brand }}
+        <input type='button' value='削除' @click='deleteItem(item.name)' />
+        <input type='button' value='＋' @click='plus(item.name)' />
           {{ item.count }}
-        <input type='button' value='minus' @click='minus(item.name)' />
+        <input type='button' value='ー' @click='minus(item.name)' />
       </li>
     </ul>
   </div>
@@ -31,7 +36,8 @@ export default {
   },
   data() {
     return {
-      name: ''
+      name: '',
+      brand: ''
     }
   },
   methods: {
@@ -39,6 +45,7 @@ export default {
       this.$store.commit('addItem', {
         item: {
           name: this.name,
+          brand: this.brand,
           count: 0
         }
       });
@@ -57,50 +64,51 @@ export default {
 </script>
 
 <style>
-/*
-* {
-  background-color: #d6d6d6;
-}
+
 
 body {
   margin: 0px;
-  background-color: white;
+  background-color: #d6d6d6;
 }
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: black;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background-color: #d6d6d6;
 }
 
 h1 {
-  margin-top: 0px;
-  margin-bottom: 0px;
-  padding-top: 15px;
-  background-color: white;
+  margin: 0px;
+  font-size: 40px;
 }
 
 form {
   margin-top: 0px;
-  background-color: white;
 }
 
 label {
-  background-color: white;
   font-weight: bold;
 }
 
 input {
-  background-color: white;
   font-weight: bold;
+}
+
+ul {
+  height: 50px;
+  margin-top: 0px;
 }
 
 ul li {
   list-style: none;
+  height: 50px;
+  font-size: 20pt;
+  word-wrap: break-word;
+}
+
+.brand {
+  border-left: 1px dashed black;
 }
 
 footer {
@@ -108,9 +116,10 @@ footer {
 }
 
 p {
-  margin: 0px;
+  margin-bottom: 0px;
   font-size: 12px;
   background-color: white;
+  background-color: #d6d6d6;
 }
-*/
+
 </style>
