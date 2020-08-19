@@ -1,6 +1,6 @@
 <template>
   <div id='app'>
-    <h1>備品管理</h1>
+    <h1>Equipment Manager</h1>
     <form v-on:submit.prevent="onclick">
       <label for='name'>品目名</label>
       <input type='text' id='name' v-model='name' required />
@@ -57,6 +57,7 @@ export default {
 </script>
 
 <style>
+/*
 * {
   background-color: #d6d6d6;
 }
@@ -111,5 +112,5 @@ p {
   font-size: 12px;
   background-color: white;
 }
-
+*/
 </style>
