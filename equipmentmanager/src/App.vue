@@ -1,25 +1,23 @@
 <template>
   <div id='app'>
     <h1>Equipment Manager</h1>
-    <p>家庭内の備品を名称・購入先(ブランド名)・個数と共に管理できます。</p>
+    <p>家庭内の備品を、名称・個数と共に管理できます。</p>
     <form v-on:submit.prevent="onclick">
       <label for='name'>品目名</label>
       <input type='text' id='name' v-model='name' required />
-      <label for='brand'>ブランド名</label>
-      <input type='text' id='brand' v-model='brand' />
-      <input type='submit' value='登録' />
+      <input class='addBtn' type='submit' value='登録' />
     </form>
-    <ul v-for='(item, index) in items' :key='index'>
-      <li>
-        {{ item.name }}
-        <span class='brand'></span>
-        {{ item.brand }}
-        <input type='button' value='削除' @click='deleteItem(item.name)' />
-        <input type='button' value='＋' @click='plus(item.name)' />
+    <table v-for='(item, index) in items' :key='index'>
+      <tr>
+        <td>{{ item.name }}</td>
+        <td>
+          <input type='button' value='削除' @click='deleteItem(item.name)' />
+          <input type='button' value='＋' @click='plus(item.name)' />
           {{ item.count }}
-        <input type='button' value='ー' @click='minus(item.name)' />
-      </li>
-    </ul>
+          <input type='button' value='ー' @click='minus(item.name)' />
+        </td>
+      </tr>
+    </table>
   </div>
 </template>
 
@@ -36,8 +34,7 @@ export default {
   },
   data() {
     return {
-      name: '',
-      brand: ''
+      name: ''
     }
   },
   methods: {
@@ -45,7 +42,6 @@ export default {
       this.$store.commit('addItem', {
         item: {
           name: this.name,
-          brand: this.brand,
           count: 0
         }
       });
@@ -95,22 +91,6 @@ input {
   font-weight: bold;
 }
 
-ul {
-  height: 50px;
-  margin-top: 0px;
-}
-
-ul li {
-  list-style: none;
-  height: 50px;
-  font-size: 20pt;
-  word-wrap: break-word;
-}
-
-.brand {
-  border-left: 1px dashed black;
-}
-
 footer {
   margin-top: auto;
 }
@@ -122,4 +102,10 @@ p {
   background-color: #d6d6d6;
 }
 
+
+@media (max-width: 767px) {
+  .addBtn {
+    margin-left: 10px;
+  }
+}
 </style>

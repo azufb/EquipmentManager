@@ -22,8 +22,8 @@ export default new Vuex.Store({
       state.items.push(payload.item);
     },
     deleteItem(state, name) {
-      let index = state.items.findIndex(item => item.name === name);
-      state.items.splice(index, 1);
+      let indexed = state.items.findIndex(item => item.name === name);
+      state.items.splice(indexed, 1);
     },
     minus(state, name) {
       let indexed = state.items.findIndex(item => item.name === name);
