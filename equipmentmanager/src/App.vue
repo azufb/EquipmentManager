@@ -43,6 +43,7 @@ export default {
           count: 0
         }
       });
+      this.name = '';
     },
     deleteItem(name) {
       this.$store.commit('deleteItem', name);
