@@ -1,31 +1,37 @@
 <template>
   <v-app id='App'>
+    <v-col :key='12'
+      cols=12 sm=10 md=8 lg=4 xl=3>
     <v-app-bar
     app 
     color='#B2EBF2'
     >
-      <div class="d-flex align-center">
+      <div>
         <h1>Equipment Manager</h1>
       </div>
     </v-app-bar>
 
     <v-main>
-      <form v-on:submit.prevent='onclick'>
+      <v-form v-on:submit.prevent='onclick'>
         <label for='name'>品目名：</label>
-        <v-text-field label='品目名を入力してください。' single-line solo 
-        id='name' v-model='name' required />
-        <v-btn type='submit'>登録</v-btn>
-      </form>
-      <div v-for='(item, index) in items' :key='index'>
-        <p>
+        <v-text-field label='品目名を入力してください。' 
+          single-line solo
+          id='name' v-model='name' required='required'></v-text-field>
+        <v-btn class='subbtn' type='submit'>登録</v-btn>
+      </v-form>
+      <ul v-for='(item, index) in items' :key='index'>
+        <li>
           {{ item.name }}
-          <v-btn color='primary' v-on:click='deleteItem(item.name)'>DELETE</v-btn>
-          <v-btn color='primary' v-on:click='plus(item.name)'>PLUS</v-btn>
-          {{ item.count }}
-          <v-btn color='primary' v-on:click='minus(item.name)'>MINUS</v-btn>
-        </p>
-      </div>
+          <div>
+            <v-btn class='btn' color='#80DEEA' v-on:click='deleteItem(item.name)'>DELETE</v-btn>
+            <v-btn class='btn' color='#80DEEA' v-on:click='plus(item.name)'>PLUS</v-btn>
+            {{ item.count }}
+            <v-btn class='btn' color='#80DEEA' v-on:click='minus(item.name)'>MINUS</v-btn>
+          </div>
+        </li>
+      </ul>
     </v-main>
+    </v-col>
   </v-app>
 </template>
 
@@ -67,3 +73,24 @@ export default {
   }
 };
 </script>
+
+<style>
+h1 {
+  font-size: 20pt;
+}
+
+ul {
+  margin-top: 10px;
+}
+
+ul li {
+  list-style: none;
+  display: block;
+}
+
+@media(max-width: 280px) {
+  .btn {
+    width: 10px;
+  }
+}
+</style>
