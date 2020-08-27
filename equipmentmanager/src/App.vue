@@ -1,110 +1,60 @@
 <template>
-  <div id='app'>
-    <h1>Equipment Manager</h1>
-    <p>家庭内の備品を、名称・個数と共に管理できます。</p>
-    <form v-on:submit.prevent="onclick">
-      <label for='name'>品目名</label>
-      <input type='text' id='name' v-model='name' required />
-      <input class='addBtn' type='submit' value='登録' />
-    </form>
-    <ul v-for='(item, index) in items' :key='index'>
-      <li>
-        {{ item.name }}
-        <input type='button' value='削除' @click='deleteItem(item.name)' />
-        <input type='button' value='＋' @click='plus(item.name)' />
-        {{ item.count }}
-        <input type='button' value='ー' @click='minus(item.name)' />
-      </li>
-    </ul>
-  </div>
+  <v-app>
+    <v-app-bar
+      app
+      color="primary"
+      dark
+    >
+      <div class="d-flex align-center">
+        <v-img
+          alt="Vuetify Logo"
+          class="shrink mr-2"
+          contain
+          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
+          transition="scale-transition"
+          width="40"
+        />
+
+        <v-img
+          alt="Vuetify Name"
+          class="shrink mt-1 hidden-sm-and-down"
+          contain
+          min-width="100"
+          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
+          width="100"
+        />
+      </div>
+
+      <v-spacer></v-spacer>
+
+      <v-btn
+        href="https://github.com/vuetifyjs/vuetify/releases/latest"
+        target="_blank"
+        text
+      >
+        <span class="mr-2">Latest Release</span>
+        <v-icon>mdi-open-in-new</v-icon>
+      </v-btn>
+    </v-app-bar>
+
+    <v-main>
+      <HelloWorld/>
+    </v-main>
+  </v-app>
 </template>
 
 <script>
+import HelloWorld from './components/HelloWorld';
+
 export default {
-  name: 'app',
-  computed: {
-    items() {
-      return this.$store.getters.items;
-    },
-    count() {
-      return this.$store.getters.items.count;
-    }
+  name: 'App',
+
+  components: {
+    HelloWorld,
   },
-  data() {
-    return {
-      name: ''
-    }
-  },
-  methods: {
-    onclick() {
-      this.$store.commit('addItem', {
-        item: {
-          name: this.name,
-          count: 0
-        }
-      });
-      this.name = '';
-    },
-    deleteItem(name) {
-      this.$store.commit('deleteItem', name);
-    },
-    minus(name) {
-      this.$store.commit('minus', name);
-    },
-    plus(name) {
-      this.$store.commit('plus', name);
-    }
-  }
-} 
+
+  data: () => ({
+    //
+  }),
+};
 </script>
-
-<style>
-
-
-body {
-  margin: 0px;
-}
-
-#app {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-h1 {
-  margin: 0px;
-  font-size: 40px;
-}
-
-form {
-  margin-top: 0px;
-}
-
-label {
-  font-weight: bold;
-}
-
-input {
-  font-weight: bold;
-}
-
-ul li {
-  list-style: none;
-}
-
-footer {
-  margin-top: auto;
-}
-
-p {
-  margin-bottom: 0px;
-  font-size: 12px;
-}
-
-
-@media (max-width: 767px) {
-  .addBtn {
-    margin-left: 10px;
-  }
-}
-</style>
