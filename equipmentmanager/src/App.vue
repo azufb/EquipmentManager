@@ -14,10 +14,10 @@
     <v-main>
       <v-form v-on:submit.prevent='onclick'>
         <label for='name'>品目名：</label>
-        <v-text-field label='品目名を入力してください。' 
-          single-line solo
-          id='name' v-model='name' required='required'></v-text-field>
-        <v-btn class='subbtn' type='submit'>登録</v-btn>
+        <v-text-field class='mb-0' label='品目名を入力してください。' 
+          single-line solo 
+          id='name' v-model='name' required></v-text-field>
+        <v-btn class='mt-0 mb-5' type='submit'>登録</v-btn>
       </v-form>
       <ul v-for='(item, index) in items' :key='index'>
         <li>
@@ -77,6 +77,10 @@ export default {
 <style>
 h1 {
   font-size: 20pt;
+}
+
+form {
+  width: 400px;
 }
 
 ul {
