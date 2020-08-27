@@ -23,10 +23,10 @@
         <li>
           {{ item.name }}
           <div>
-            <v-btn class='btn' color='#80DEEA' v-on:click='deleteItem(item.name)'>DELETE</v-btn>
-            <v-btn class='btn' color='#80DEEA' v-on:click='plus(item.name)'>PLUS</v-btn>
+            <v-btn class='btn' color='#80DEEA' v-on:click='deleteItem(item.d)'>DELETE</v-btn>
+            <v-btn class='btn' color='#80DEEA' v-on:click='plus(item.d)'>PLUS</v-btn>
             {{ item.count }}
-            <v-btn class='btn' color='#80DEEA' v-on:click='minus(item.name)'>MINUS</v-btn>
+            <v-btn class='btn' color='#80DEEA' v-on:click='minus(item.d)'>MINUS</v-btn>
           </div>
         </li>
       </ul>
@@ -48,7 +48,8 @@ export default {
   },
   data() {
     return {
-      name: ''
+      name: '',
+      d: ''
     }
   },
   methods: {
@@ -56,19 +57,20 @@ export default {
       this.$store.commit('addItem', {
         item: {
           name: this.name,
-          count: 0
-        }
+          count: 0,
+          d: new Date()
+        },
       })
       this.name = ''
     },
-    deleteItem(name) {
-      this.$store.commit('deleteItem', name)
+    deleteItem(d) {
+      this.$store.commit('deleteItem', d)
     },
-    plus(name) {
-      this.$store.commit('plus', name)
+    plus(d) {
+      this.$store.commit('plus', d)
     },
-    minus(name) {
-      this.$store.commit('minus', name)
+    minus(d) {
+      this.$store.commit('minus', d)
     }
   }
 };
