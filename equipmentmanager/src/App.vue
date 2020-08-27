@@ -63,14 +63,12 @@ export default {
 
 body {
   margin: 0px;
-  background-color: #d6d6d6;
 }
 
 #app {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #d6d6d6;
 }
 
 h1 {
@@ -101,8 +99,6 @@ footer {
 p {
   margin-bottom: 0px;
   font-size: 12px;
-  background-color: white;
-  background-color: #d6d6d6;
 }
 
 
