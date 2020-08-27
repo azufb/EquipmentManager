@@ -21,16 +21,16 @@ export default new Vuex.Store({
     addItem(state, payload) {
       state.items.push(payload.item);
     },
-    deleteItem(state, name) {
-      let indexed = state.items.findIndex(item => item.name === name);
+    deleteItem(state, d) {
+      let indexed = state.items.findIndex(item => item.d === d);
       state.items.splice(indexed, 1);
     },
-    minus(state, name) {
-      let indexed = state.items.findIndex(item => item.name === name);
+    minus(state, d) {
+      let indexed = state.items.findIndex(item => item.d === d);
       state.items[indexed].count --;
     },
-    plus(state, name) {
-      let indexed = state.items.findIndex(item => item.name === name);
+    plus(state, d) {
+      let indexed = state.items.findIndex(item => item.d === d);
       state.items[indexed].count ++;
     }
   },
