@@ -82,7 +82,7 @@ h1 {
 }
 
 form {
-  width: 400px;
+  width: 300px;
 }
 
 ul {
@@ -94,7 +94,7 @@ ul li {
   display: block;
 }
 
-@media(max-width: 280px) {
+@media(max-width: 767px) {
   .btn {
     width: 10px;
   }
