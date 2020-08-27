@@ -1,60 +1,69 @@
 <template>
-  <v-app>
+  <v-app id='App'>
     <v-app-bar
-      app
-      color="primary"
-      dark
+    app 
+    color='#B2EBF2'
     >
       <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
+        <h1>Equipment Manager</h1>
       </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
     </v-app-bar>
 
     <v-main>
-      <HelloWorld/>
+      <form v-on:submit.prevent='onclick'>
+        <label for='name'>品目名：</label>
+        <v-text-field label='品目名を入力してください。' single-line solo 
+        id='name' v-model='name' required />
+        <v-btn type='submit'>登録</v-btn>
+      </form>
+      <div v-for='(item, index) in items' :key='index'>
+        <p>
+          {{ item.name }}
+          <v-btn color='primary' v-on:click='deleteItem(item.name)'>DELETE</v-btn>
+          <v-btn color='primary' v-on:click='plus(item.name)'>PLUS</v-btn>
+          {{ item.count }}
+          <v-btn color='primary' v-on:click='minus(item.name)'>MINUS</v-btn>
+        </p>
+      </div>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
-
 export default {
   name: 'App',
-
-  components: {
-    HelloWorld,
+  computed: {
+    items() {
+      return this.$store.getters.items
+    },
+    count() {
+      return this.$store.getters.items.count
+    }
   },
-
-  data: () => ({
-    //
-  }),
+  data() {
+    return {
+      name: ''
+    }
+  },
+  methods: {
+    onclick() {
+      this.$store.commit('addItem', {
+        item: {
+          name: this.name,
+          count: 0
+        }
+      })
+      this.name = ''
+    },
+    deleteItem(name) {
+      this.$store.commit('deleteItem', name)
+    },
+    plus(name) {
+      this.$store.commit('plus', name)
+    },
+    minus(name) {
+      this.$store.commit('minus', name)
+    }
+  }
 };
 </script>
