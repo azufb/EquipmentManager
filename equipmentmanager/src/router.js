@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import store from './store/'
+import Home from './views/Home.vue'
+import Login from './views/Login.vue'
 
 import { components, AmplifyEventBus } from 'aws-amplify-vue'
 import Amplify, * as AmplifyModules from 'aws-amplify'
