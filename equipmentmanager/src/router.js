@@ -4,8 +4,8 @@ import store from './store/'
 import Home from './views/Home.vue'
 import Login from './views/Login.vue'
 
-import { components, AmplifyEventBus } from 'aws-amplify-vue'
-import Amplify, * as AmplifyModules from 'aws-amplify'
+import { AmplifyEventBus } from 'aws-amplify-vue'
+import * as AmplifyModules from 'aws-amplify'
 import { AmplifyPlugin } from 'aws-amplify-vue'
 
 Vue.use(Router)
@@ -14,23 +14,27 @@ Vue.use(AmplifyPlugin, AmplifyModules)
 let user;
 
 // ユーザー管理
-getUser().then((user) => {
+getUser().then((user, error) => {
     if (user) {
-        router.push({ path: '/' });
+      router.push({ path: "/" },()=>{});
+    }
+    if (error) {
+      console.error(error);
     }
 });
 
-function getUser() {
-    return Vue.prototype.Amplify.Auth.currentAuthenticatedUser().then((data) => {
-        if (data && data.signInUserSession) {
-            store.commit('setUser', data);
-            return data;
-        }
-    }).catch(() => {
-        store.commit('setUser', null);
-        return null;
-    });
-}
+AmplifyEventBus.$on("authState", async state => {
+    if (state === "signedOut") {
+      user = null;
+      store.commit("setUser", null);
+      router.push({ path: "/login" });
+    } else if (state === "signedIn") {
+      user = await getUser();
+      router.push({ path: "/" });
+    }
+});
+
+
 
 // ログイン状態管理
 AmplifyEventBus.$on('authState', async(state) => {
@@ -44,22 +48,40 @@ AmplifyEventBus.$on('authState', async(state) => {
     }
 });
 
+function getUser() {
+    return Vue.prototype.$Amplify.Auth.currentAuthenticatedUser()
+      .then(data => {
+        if (data && data.signInUserSession) {
+          store.commit("setUser", data);
+          return data;
+        }
+      })
+      .catch(e => {
+        console.info(e);
+        store.commit("setUser", null);
+        return null;
+      });
+}
+  
+
 // ルーティング設定
 const router = new Router({
     mode: 'history',
+    base: process.env.BASE_URL,
     routes: [
         {
             // ログインページ
             path: '/login',
-            name: 'login',
-            component: Login
+            name: 'Authenticator',
+            component: Login,
+            meta: { requiresAuth: false }
         },
         {
             // トップページ
             path: '/',
             name: 'home',
             component: Home,
-            mata: { requiresAuth: true}
+            mata: { requiresAuth: false }
         }
     ]
 });
@@ -70,7 +92,10 @@ router.beforeResolve(async(to, from, next) => {
         user = await getUser();
         if (!user) {
             return next({
-                path: '/login'
+                path: '/login',
+                query: {
+                    redirect: to.fullPath
+                }
             });
         }
         return next()
