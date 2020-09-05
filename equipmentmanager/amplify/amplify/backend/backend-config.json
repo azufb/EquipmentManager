@@ -1,0 +1,10 @@
+{
+  "auth": {
+    "equipmentmanager2fe58063": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}

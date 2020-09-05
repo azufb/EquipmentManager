@@ -6,6 +6,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    user: null,
     items: []
   },
 
@@ -18,6 +19,9 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    setUser(state, user) {
+      state.user = user
+    },
     addItem(state, payload) {
       state.items.push(payload.item);
     },
