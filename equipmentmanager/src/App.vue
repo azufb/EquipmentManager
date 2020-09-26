@@ -1,12 +1,6 @@
 <template>
     <div class='app'>
-        <div id='nav'>
-          <router-link to='/'>Home</router-link>
-          <router-link to='/login'>Login</router-link>
-        </div>
-        <router-view />
-    </div>
-    <!--v-col :key='12'
+    <v-col :key='12'
       cols=12 sm=10 md=8 lg=4 xl=3>
     <v-app-bar
     app 
@@ -37,13 +31,14 @@
         </li>
       </ul>
     </v-main>
-    </v-col-->
+    </v-col>
+    </div>
 </template>
 
 <script>
 export default {
   name: 'app',
-  /*computed: {
+  computed: {
     items() {
       return this.$store.getters.items
     },
@@ -77,7 +72,7 @@ export default {
     minus(d) {
       this.$store.commit('minus', d)
     }
-  }*/
+  }
 };
 </script>
 
